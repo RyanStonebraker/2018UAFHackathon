@@ -29,23 +29,29 @@ module hackathon_logo(scaleFactor=0.1) {
 
 module base() {
      translate([0, 0, -5]) {
-        linear_extrude(2) {
+        linear_extrude(6) {
             circle(d=494, $fn = 200);
         }
     }
 }
 
 module logo_and_shield() {
+    difference() {
+        
+        union() {
+            base();
+            
+            color("DarkTurquoise", 1.0)
+                linear_extrude(8, center=true)
+                    captain_america_shield(2);
+        }
     
-    base();
-    
-    color("DarkTurquoise", 1.0)
-        linear_extrude(4, center=true)
-            captain_america_shield(2);
-    
-    color("OrangeRed", 1.0)
-        linear_extrude(6, center=true)
-            hackathon_logo(0.07);
+        color("OrangeRed", 1.0)
+            mirror()
+                translate([0, 0, -4])
+                    linear_extrude(3, center=true)
+                        hackathon_logo(0.19);
+    }
     
 }
 
